@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --background: 0.08 0.012 255;
+    --foreground: 0.92 0.008 240;
+    --card: 0.11 0.014 255;
+    --card-foreground: 0.92 0.008 240;
+    --popover: 0.1 0.014 255;
+    --popover-foreground: 0.92 0.008 240;
+    --primary: 0.78 0.16 200;
+    --primary-foreground: 0.08 0.012 255;
+    --secondary: 0.15 0.014 255;
+    --secondary-foreground: 0.92 0.008 240;
+    --muted: 0.14 0.014 255;
+    --muted-foreground: 0.55 0.008 240;
+    --accent: 0.14 0.014 255;
+    --accent-foreground: 0.78 0.16 200;
+    --destructive: 0.58 0.22 25;
+    --destructive-foreground: 0.92 0.008 240;
+    --border: 0.2 0.014 255;
+    --input: 0.15 0.014 255;
+    --ring: 0.78 0.16 200;
+    --radius: 3px;
+    --chart-1: 0.78 0.16 200;
+    --chart-2: 0.65 0.18 145;
+    --chart-3: 0.75 0.18 70;
+    --chart-4: 0.58 0.22 25;
+    --chart-5: 0.72 0.14 280;
+    --sidebar: 0.075 0.013 255;
+    --sidebar-foreground: 0.92 0.008 240;
+    --sidebar-primary: 0.78 0.16 200;
+    --sidebar-primary-foreground: 0.08 0.012 255;
+    --sidebar-accent: 0.13 0.014 255;
+    --sidebar-accent-foreground: 0.92 0.008 240;
+    --sidebar-border: 0.18 0.014 255;
+    --sidebar-ring: 0.78 0.16 200;
+    /* semantic extras */
+    --success: 0.65 0.18 145;
+    --warning: 0.75 0.18 70;
+    --risk-high: 0.58 0.22 25;
+    --risk-medium: 0.75 0.18 70;
+    --risk-low: 0.65 0.18 145;
+    --cyan-glow: 0.78 0.16 200;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 14px;
+    background-image: radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        oklch(0.78 0.16 200 / 0.06),
+        transparent
+      ), linear-gradient(180deg, oklch(0.08 0.012 255), oklch(0.06 0.01 255));
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  .data-value {
+    font-family: "JetBrains Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .terminal-card {
+    @apply border border-border bg-card;
+    position: relative;
+    overflow: hidden;
+  }
+  .terminal-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0.78 0.16 200 / 0.4),
+      transparent
+    );
+    pointer-events: none;
+  }
+  .glow-cyan {
+    box-shadow: 0 0 20px oklch(0.78 0.16 200 / 0.15), 0 0 40px
+      oklch(0.78 0.16 200 / 0.05);
+  }
+  .live-pulse {
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+  .ticker-scroll {
+    animation: ticker-move 60s linear infinite;
+  }
+  @keyframes ticker-move {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .scanline {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0.78 0.16 200 / 0.02) 2px,
+      oklch(0.78 0.16 200 / 0.02) 4px
+    );
+    pointer-events: none;
+  }
+  .risk-cell-high {
+    color: oklch(var(--risk-high));
+  }
+  .risk-cell-medium {
+    color: oklch(var(--risk-medium));
+  }
+  .risk-cell-low {
+    color: oklch(var(--risk-low));
+  }
+}
